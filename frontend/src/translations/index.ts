@@ -7,6 +7,7 @@ export interface LanguageConfig {
     tagline: string;
     tabUpload: string;
     tabTimeline: string;
+    tabChat: string;
     tabVitals: string;
     tabMeds: string;
     tabAbha: string;
@@ -40,6 +41,7 @@ export const LANGUAGES: Record<string, LanguageConfig> = {
       tagline: 'AI-Powered Personal Health Intelligence & ABDM Interoperability',
       tabUpload: 'Scan & Ingest',
       tabTimeline: 'Health Timeline',
+      tabChat: 'AI Health Chat',
       tabVitals: 'Biomarker Trends',
       tabMeds: 'Medication Regimen',
       tabAbha: 'ABDM / ABHA Card',
@@ -71,6 +73,7 @@ export const LANGUAGES: Record<string, LanguageConfig> = {
       tagline: 'एआई-संचालित व्यक्तिगत स्वास्थ्य एवं आभा (ABDM) प्लेटफ़ॉर्म',
       tabUpload: 'जांच पर्ची अपलोड',
       tabTimeline: 'स्वास्थ्य टाइमलाइन',
+      tabChat: 'एआई स्वास्थ्य चैट',
       tabVitals: 'बायोमार्कर्स एवं रुझान',
       tabMeds: 'दवाओं की सूची',
       tabAbha: 'आभा (ABHA) कार्ड',
@@ -102,6 +105,7 @@ export const LANGUAGES: Record<string, LanguageConfig> = {
       tagline: 'செயற்கை நுண்ணறிவு மருத்துவ உதவியாளர் & ABDM தளம்',
       tabUpload: 'மருத்துவ ஆவணம் பதிவேற்றம்',
       tabTimeline: 'சுகாதார காலவரிசை',
+      tabChat: 'AI சுகாதார அரட்டை',
       tabVitals: 'உடல்நல அளவீடுகள்',
       tabMeds: 'மருந்துகள் அட்டவணை',
       tabAbha: 'ஆபா (ABHA) அட்டை',
@@ -133,6 +137,7 @@ export const LANGUAGES: Record<string, LanguageConfig> = {
       tagline: 'AI ఆధారిత ఆరోగ్య సహాయకుడు & ABDM అనుసంధానం',
       tabUpload: 'రికార్డుల అప్‌లోడ్',
       tabTimeline: 'ఆరోగ్య కాలక్రమం',
+      tabChat: 'AI ఆరోగ్య చాట్',
       tabVitals: 'ఆరోగ్య కొలమానాలు',
       tabMeds: 'మందుల వివరాలు',
       tabAbha: 'ఆభా (ABHA) కార్డ్',
@@ -164,6 +169,7 @@ export const LANGUAGES: Record<string, LanguageConfig> = {
       tagline: 'AI চালিত স্বাস্থ্য সহায়ক ও ABDM সমন্বয়',
       tabUpload: 'নথি আপলোড',
       tabTimeline: 'স্বাস্থ্য টাইমলাইন',
+      tabChat: 'এআই স্বাস্থ্য চ্যাট',
       tabVitals: 'স্বাস্থ্য সূচক',
       tabMeds: 'ওষুধের তালিকা',
       tabAbha: 'আভা (ABHA) কার্ড',

@@ -7,7 +7,9 @@ import {
   UploadCloud,
   Code2,
   Presentation,
-  Network
+  Network,
+  Bot,
+  Sparkles
 } from 'lucide-react';
 
 import { 
@@ -23,6 +25,7 @@ import { RecordUpload } from './components/RecordUpload';
 import { TimelineView } from './components/TimelineView';
 import { VitalsView } from './components/VitalsView';
 import { MedicationsView } from './components/MedicationsView';
+import { FullPageChatView } from './components/FullPageChatView';
 import { AbhaModal } from './components/AbhaModal';
 import { ArchitectureModal } from './components/ArchitectureModal';
 import { PitchDeckModal } from './components/PitchDeckModal';
@@ -35,7 +38,7 @@ export const App: React.FC = () => {
   });
 
   const [currentLang, setCurrentLang] = useState<string>('en');
-  const [activeTab, setActiveTab] = useState<'timeline' | 'upload' | 'vitals' | 'meds' | 'abha'>('timeline');
+  const [activeTab, setActiveTab] = useState<'timeline' | 'chat' | 'upload' | 'vitals' | 'meds' | 'abha'>('timeline');
 
   const [patient, setPatient] = useState<PatientProfile | null>(null);
   const [records, setRecords] = useState<HealthRecord[]>([]);
@@ -178,6 +181,21 @@ export const App: React.FC = () => {
           </button>
 
           <button
+            onClick={() => setActiveTab('chat')}
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all whitespace-nowrap cursor-pointer ${
+              activeTab === 'chat'
+                ? 'bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-500/50 shadow-sm'
+                : 'text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-300 hover:bg-slate-100 dark:hover:bg-slate-900/60'
+            }`}
+          >
+            <Bot className="w-4 h-4 text-cyan-500" />
+            <span>{t.tabChat}</span>
+            <span className="px-1.5 py-0.2 rounded-full bg-cyan-500/20 text-[10px] text-cyan-600 dark:text-cyan-300 font-bold border border-cyan-500/30">
+              AI Copilot
+            </span>
+          </button>
+
+          <button
             onClick={() => setActiveTab('upload')}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all whitespace-nowrap cursor-pointer ${
               activeTab === 'upload'
@@ -233,6 +251,14 @@ export const App: React.FC = () => {
             currentLang={currentLang}
             onDeleteRecord={handleDeleteRecord}
             onViewFhir={handleViewFhir}
+          />
+        )}
+
+        {activeTab === 'chat' && (
+          <FullPageChatView
+            currentLang={currentLang}
+            patient={patient}
+            onRecordCreated={() => fetchData(currentLang)}
           />
         )}
 
@@ -316,11 +342,31 @@ export const App: React.FC = () => {
         onClose={() => setIsPitchModalOpen(false)}
       />
 
+      {/* Floating AI Assistant Trigger Button (Bottom-Right Corner) */}
+      <div className="fixed bottom-6 right-6 z-40">
+        <button
+          onClick={() => setIsChatOpen(!isChatOpen)}
+          className="group flex items-center gap-2.5 pl-3.5 pr-4 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold text-sm shadow-xl shadow-cyan-500/30 hover:shadow-cyan-500/50 hover:scale-105 active:scale-95 transition-all cursor-pointer border border-cyan-300/30"
+          title="Open HealthLens AI Assistant Panel"
+          aria-label="Open HealthLens AI Assistant"
+        >
+          <div className="relative">
+            <Bot className="w-5 h-5 animate-pulse" />
+            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-white dark:border-slate-950 animate-ping" />
+            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-white dark:border-slate-950" />
+          </div>
+          <span className="font-display tracking-tight hidden sm:inline">Ask Health Copilot</span>
+        </button>
+      </div>
+
       {/* Floating AI Health Copilot Assistant Drawer */}
       <CopilotChatDrawer
         isOpen={isChatOpen}
         onClose={() => setIsChatOpen(false)}
         currentLang={currentLang}
+        patient={patient}
+        onOpenFullPageChat={() => setActiveTab('chat')}
+        onRecordCreated={() => fetchData(currentLang)}
       />
 
       {/* Single Record FHIR Viewer Modal */}

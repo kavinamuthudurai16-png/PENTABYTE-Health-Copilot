@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime
 
-from .routers import records, timeline, copilot, abdm
+from .routers import records, timeline, copilot, abdm, chat
 
 app = FastAPI(
     title="PENTABYTE AI Health Copilot API",
@@ -31,6 +31,7 @@ app.include_router(records.router)
 app.include_router(timeline.router)
 app.include_router(copilot.router)
 app.include_router(abdm.router)
+app.include_router(chat.router)
 
 @app.get("/api/health")
 def health_check():

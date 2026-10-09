@@ -114,10 +114,71 @@ export interface ABHACard {
   issued_at: string;
 }
 
+export interface ChatCitation {
+  document_id: string;
+  title: string;
+  date: string;
+}
+
+export interface ComparisonItem {
+  test_name: string;
+  previous_value: string;
+  latest_value: string;
+  unit: string;
+  change: string;
+  status: string;
+  source: string;
+  explanation: string;
+}
+
+export interface ChatStructuredCard {
+  type: string;
+  title: string;
+  date?: string;
+  facility?: string;
+  previous_date?: string;
+  latest_date?: string;
+  items?: ComparisonItem[];
+  patient?: string;
+  doctor?: string;
+  recent_improvements?: string[];
+  questions_to_ask?: string[];
+  active_count?: number;
+  short_term_count?: number;
+  safety_alert?: string;
+  verified_items?: string[];
+  unverified_items?: string[];
+  key_findings?: string[];
+  doctor_review?: string;
+  record_id?: string;
+  extracted_labs_count?: number;
+  abnormal_count?: number;
+  extracted_meds_count?: number;
+  key_takeaway?: string;
+  total_records?: number;
+  active_conditions?: string[];
+  allergies?: string[];
+  vital_status?: string;
+}
+
 export interface ChatMessage {
   id: string;
-  sender: 'user' | 'assistant';
-  text: string;
+  role?: 'user' | 'assistant';
+  sender?: 'user' | 'assistant';
+  content: string;
+  text?: string;
   timestamp: string;
+  citations?: ChatCitation[];
+  structured_card?: ChatStructuredCard;
+  ai_provider?: string;
   references?: string[];
 }
+
+export interface ChatSession {
+  id: string;
+  title: string;
+  created_at: string;
+  updated_at: string;
+  messages: ChatMessage[];
+}
+
