@@ -8,5 +8,5 @@ if root_dir not in sys.path:
 
 from backend.app.main import app
 
-# Expose app for Vercel
-export_app = app
+# Expose app and handler for Vercel Serverless ASGI runtime
+handler = app
